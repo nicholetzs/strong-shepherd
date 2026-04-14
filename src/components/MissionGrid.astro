@@ -1,0 +1,26 @@
+---
+import { projects } from '../data/projects';
+---
+
+<section id="projetos" class="relative bg-space px-6 py-20">
+  <div class="mx-auto max-w-6xl">
+    <p class="font-mono text-xs uppercase tracking-[0.28em] text-[#5b3ba8]">
+      MISSOES ATIVAS
+    </p>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {projects.map((project) => (
+        <article class="mission-card">
+          <div class="mission-tape">{project.mission}</div>
+          <div class="mission-monitor">
+            <span>{project.title}</span>
+          </div>
+          <h2>{project.title}</h2>
+          <p class="mission-stack">{project.stack.join(' · ')}</p>
+          <p class="mission-description">{project.description}</p>
+          <a class="mission-button" href={`/projects/${project.slug}/`}>ACESSAR MISSAO</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

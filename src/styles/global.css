@@ -1,1 +1,212 @@
 @import "tailwindcss";
+
+@theme {
+  --color-space: #06030f;
+  --color-panel: #0e0720;
+  --color-panel-soft: #120926;
+  --color-violet-line: #3d2870;
+  --color-violet-bright: #9b4dca;
+  --color-violet-text: #c084fc;
+  --color-paper: #f5f0dc;
+}
+
+html {
+
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 28% 72%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 46% 32%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 64% 78%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, 0.6) 0 1px, transparent 1.4px),
+    radial-gradient(ellipse at 50% 35%, rgba(124, 58, 237, 0.16), transparent 42%),
+    radial-gradient(ellipse at 70% 68%, rgba(155, 77, 202, 0.1), transparent 36%),
+    linear-gradient(180deg, #03010a 0%, #06030f 42%, #090417 100%);
+  background-attachment: fixed;
+  background-size:
+    360px 360px,
+    420px 420px,
+    520px 520px,
+    460px 460px,
+    560px 560px,
+    620px 620px,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  color: #e8d8ff;
+}
+
+@layer components {
+  .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,.8) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 70% 12%, rgba(255,255,255,.7) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 82% 60%, rgba(255,255,255,.5) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,.5) 0 1px, transparent 1.5px);
+  }
+
+  .cupola-shell {
+    display: grid;
+    min-height: 420px;
+    place-items: center;
+  }
+
+  .cupola-ring {
+    display: grid;
+    width: min(78vw, 430px);
+    aspect-ratio: 1;
+    place-items: center;
+    border: 22px solid #2a1a4a;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle, rgba(192,132,252,.32), rgba(124,58,237,.08) 30%, rgba(13,9,32,.72) 60%),
+      #0d0920;
+    box-shadow: 0 0 80px rgba(124, 58, 237, .24);
+  }
+
+  .cupola-core {
+    width: 48%;
+    aspect-ratio: 1;
+    clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    border: 2px solid #7c55c8;
+    background: rgba(16, 8, 37, .76);
+    box-shadow: inset 0 0 50px rgba(192, 132, 252, .18);
+  }
+
+  .module-card {
+    display: flex;
+    min-height: 210px;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #7c3aed;
+    border-radius: 8px;
+    background: #120926;
+    padding: 0 18px 18px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .module-card-header {
+    margin-inline: -18px;
+    margin-bottom: 22px;
+    width: calc(100% + 36px);
+    border-radius: 8px 8px 0 0;
+    background: #1e0f3d;
+    padding: 12px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: #a78bca;
+  }
+
+  .module-card-screen {
+    display: grid;
+    width: 72px;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid #9b4dca;
+    border-radius: 999px;
+    background: #1e0f3d;
+    font-family: "Courier New", monospace;
+    color: #c084fc;
+  }
+
+  .module-card h3 {
+    margin-top: 20px;
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    color: #c084fc;
+  }
+
+  .module-card p,
+  .mission-description {
+    color: #a78bca;
+  }
+
+  .module-status {
+    margin-top: 14px;
+    border: 1px solid #9b4dca;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    color: #c084fc;
+  }
+
+  .mission-card {
+    position: relative;
+    border: 2px solid #2a1a4a;
+    border-radius: 6px;
+    background: #0e0720;
+    padding: 28px 20px 24px;
+  }
+
+  .mission-tape {
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    background: rgba(245, 200, 66, .72);
+    padding: 3px 16px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: #412402;
+  }
+
+  .mission-monitor {
+    display: grid;
+    min-height: 160px;
+    place-items: center;
+    border: 2px solid #4c2d8a;
+    border-radius: 4px;
+    background: #0a051a;
+    font-family: "Courier New", monospace;
+    color: #7c3aed;
+  }
+
+  .mission-card h2 {
+    margin-top: 22px;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    color: #e8d8ff;
+  }
+
+  .mission-stack {
+    margin-top: 8px;
+    font-family: "Courier New", monospace;
+    font-size: .85rem;
+    color: #7c55c8;
+  }
+
+  .mission-description {
+    margin-top: 14px;
+  }
+
+  .mission-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #9b4dca;
+    border-radius: 4px;
+    background: #2a1265;
+    padding: 10px 16px;
+    font-family: "Courier New", monospace;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    color: #c084fc;
+    text-decoration: none;
+  }
+
+  .mission-button-secondary {
+    background: transparent;
+  }
+}

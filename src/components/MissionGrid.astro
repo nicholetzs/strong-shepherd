@@ -2,18 +2,18 @@
 import { projects } from '../data/projects';
 ---
 
-<section id="projetos" class="relative bg-space px-6 py-20">
-  <div class="mx-auto max-w-6xl">
-    <p class="font-mono text-xs uppercase tracking-[0.28em] text-[#5b3ba8]">
-      MISSOES ATIVAS
-    </p>
+<section id="projetos" class="station-section section-reveal">
+  <div class="section-shell">
+    <p class="section-label">MISSOES ATIVAS</p>
+    <h2 class="section-title">Projetos em painel de bordo.</h2>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
+    <div class="mission-grid">
       {projects.map((project) => (
         <article class="mission-card">
           <div class="mission-tape">{project.mission}</div>
           <div class="mission-monitor">
-            <span>{project.title}</span>
+            <span class="monitor-line">STATUS: {project.status}</span>
+            <span class="monitor-title">{project.title}</span>
           </div>
           <h2>{project.title}</h2>
           <p class="mission-stack">{project.stack.join(' · ')}</p>

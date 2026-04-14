@@ -3,14 +3,15 @@ import { modules } from '../data/modules';
 import ModuleCard from './ModuleCard.astro';
 ---
 
-<section id="modulos" class="relative bg-[#06030f] px-6 py-20">
-  <p class="font-mono text-xs uppercase tracking-[0.28em] text-[#5b3ba8]">
-    MAPA DE MODULOS
-  </p>
+<section id="modulos" class="station-section section-reveal">
+  <div class="section-shell">
+    <p class="section-label">MAPA DE MODULOS</p>
+    <h2 class="section-title">Escolha um modulo da estacao.</h2>
 
-  <div class="mt-12 grid gap-6 md:grid-cols-3 lg:grid-cols-4">
-  {modules.map((module)=> (
-    <ModuleCard module={module} />
-  ))}
+    <div class="module-track">
+      {modules.map((module) => (
+        <ModuleCard module={module} />
+      ))}
+    </div>
   </div>
 </section>

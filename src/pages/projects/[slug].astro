@@ -1,5 +1,5 @@
 ---
-
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { projects } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -12,3 +12,26 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 
 ---
+
+<BaseLayout title={`${project.title} | Estacao Borboleta`}>
+  <main class="project-page section-reveal">
+    <a class="back-link" href="/">VOLTAR PARA A ESTACAO</a>
+
+    <article class="project-panel">
+      <p class="section-label">{project.mission}</p>
+      <h1>{project.title}</h1>
+      <p>{project.description}</p>
+
+      <ul>
+        {project.stack.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <span class="project-status">STATUS: {project.status}</span>
+
+      <div class="hero-actions">
+        {project.github && <a class="mission-button" href={project.github}>GITHUB</a>}
+        {project.href && <a class="mission-button" href={project.href}>VER PROJETO</a>}
+      </div>
+    </article>
+  </main>
+</BaseLayout>

@@ -1,9 +1,36 @@
-<section class="min-h-screen  px-6 py-20">
-  <p class="font-mono text-xs uppercase tracking-[0.28em] text-violet-bright">
-    ESTACAO BORBOLETA
-  </p>
+---
+import butterflyNebula from '../assets/754349main_butterfly_nebula_full_full-jpg.webp';
+---
 
-  <h1 class="mt-6 font-serif text-5xl text-[#f4eaff]">
-    Pesquisa, codigo e interfaces em orbita.
-  </h1>
+<section class="hero-section section-reveal">
+  <div class="hero-copy">
+    <p class="section-label">ESTACAO BORBOLETA</p>
+
+    <h1>Pesquisa, codigo e interfaces em orbita.</h1>
+
+    <p class="hero-text">
+      Portfolio de projetos pessoais, ciencia, dados e experimentos visuais,
+      organizado como uma estacao espacial pixelada.
+    </p>
+
+    <div class="hero-actions">
+      <a class="mission-button" href="#projetos">ACESSAR MISSOES</a>
+      <a class="mission-button mission-button-secondary" href="#modulos">MAPA DE MODULOS</a>
+    </div>
+  </div>
+
+  <div class="cupola-pixel" aria-hidden="true">
+    <img
+      class="cupola-nebula-image"
+      src={butterflyNebula.src}
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+    <span class="cupola-window cupola-window-top"></span>
+    <span class="cupola-window cupola-window-left"></span>
+    <span class="cupola-window cupola-window-center"></span>
+    <span class="cupola-window cupola-window-right"></span>
+    <span class="cupola-window cupola-window-bottom"></span>
+  </div>
 </section>

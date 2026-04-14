@@ -1,0 +1,19 @@
+---
+import type { PortfolioModule } from '../data/modules';
+
+type Props = {
+  module: PortfolioModule;
+};
+
+const { module } = Astro.props;
+---
+
+<a class="module-card" href={module.href}>
+  <span class="module-card-header">{module.codeName}</span>
+  <span class="module-screen">
+    <span>{module.kind.slice(0, 2).toUpperCase()}</span>
+  </span>
+  <strong>{module.title}</strong>
+  <small>{module.subtitle}</small>
+  {module.status && <em>{module.status}</em>}
+</a>

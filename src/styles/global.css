@@ -11,6 +11,819 @@
 }
 
 html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+a {
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+@keyframes soft-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pixel-glow {
+  from {
+    box-shadow: 0 0 0 rgba(192, 132, 252, 0);
+  }
+
+  to {
+    box-shadow: 0 0 28px rgba(192, 132, 252, .26);
+  }
+}
+
+.section-reveal {
+  animation: soft-arrival 620ms ease both;
+}
+
+.section-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.section-label {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: .75rem;
+  letter-spacing: .28em;
+  color: #7c55c8;
+  text-transform: uppercase;
+}
+
+.section-title {
+  max-width: 680px;
+  margin: 16px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #f4eaff;
+}
+
+.hero-section {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+  padding: 72px 0 64px;
+}
+
+.hero-copy h1 {
+  max-width: 760px;
+  margin: 24px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 9vw, 6.8rem);
+  font-weight: 400;
+  line-height: .92;
+  color: #f4eaff;
+}
+
+.hero-text {
+  max-width: 610px;
+  margin: 24px 0 0;
+  color: #a78bca;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cupola-pixel {
+  display: grid;
+  position: relative;
+  width: min(74vw, 420px);
+  aspect-ratio: 1;
+  place-self: center;
+  place-items: center;
+  border: 18px solid #2a1a4a;
+  border-radius: 50%;
+  background: rgba(13, 9, 32, .58);
+  box-shadow: inset 0 0 0 2px #3d2870, 0 0 52px rgba(124, 58, 237, .18);
+  image-rendering: pixelated;
+}
+
+.cupola-window {
+  position: absolute;
+  display: block;
+  border: 2px solid #7c55c8;
+  background: rgba(16, 8, 37, .72);
+  clip-path: polygon(50% 0, 92% 25%, 92% 75%, 50% 100%, 8% 75%, 8% 25%);
+}
+
+.cupola-window-center {
+  width: 46%;
+  aspect-ratio: 1;
+}
+
+.cupola-window-top,
+.cupola-window-bottom {
+  width: 26%;
+  aspect-ratio: 1;
+}
+
+.cupola-window-top {
+  top: 9%;
+}
+
+.cupola-window-bottom {
+  bottom: 9%;
+}
+
+.cupola-window-left,
+.cupola-window-right {
+  width: 26%;
+  aspect-ratio: 1;
+}
+
+.cupola-window-left {
+  left: 10%;
+}
+
+.cupola-window-right {
+  right: 10%;
+}
+
+.station-section {
+  padding: 88px 0;
+}
+
+.module-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.module-card {
+  min-height: 236px;
+  border-color: #3d2870;
+  background: rgba(18, 9, 38, .88);
+  box-shadow: inset 0 0 0 1px rgba(192, 132, 252, .08);
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  border-color: #9b4dca;
+  animation: pixel-glow 260ms ease both;
+}
+
+.module-card-header {
+  display: block;
+}
+
+.module-screen {
+  display: grid;
+  width: 72px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid #9b4dca;
+  border-radius: 4px;
+  background: #050312;
+  color: #c084fc;
+}
+
+.module-card strong {
+  margin-top: 18px;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #e8d8ff;
+}
+
+.module-card small {
+  margin-top: 8px;
+  color: #a78bca;
+}
+
+.module-card em {
+  margin-top: 14px;
+  border: 1px solid #7c55c8;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #c084fc;
+  font-size: .68rem;
+  font-style: normal;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.mission-card {
+  background: rgba(14, 7, 32, .92);
+}
+
+.mission-monitor {
+  align-content: center;
+  gap: 10px;
+  padding: 18px;
+  text-align: center;
+  background:
+    repeating-linear-gradient(0deg, rgba(192, 132, 252, .05) 0 1px, transparent 1px 5px),
+    #050210;
+}
+
+.monitor-line {
+  font-size: .7rem;
+  color: #7c55c8;
+}
+
+.monitor-title {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  color: #c084fc;
+}
+
+/* Gacha station prototype */
+body:has(.gacha-stage) {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #020008;
+}
+
+.gacha-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  color: #eef8ff;
+  background: #020008;
+  isolation: isolate;
+}
+
+.gacha-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image:
+    linear-gradient(90deg, rgba(2, 0, 8, .45), rgba(2, 0, 8, .08) 34%, rgba(2, 0, 8, .25)),
+    linear-gradient(180deg, rgba(2, 0, 8, .18), rgba(2, 0, 8, .12) 55%, rgba(2, 0, 8, .62)),
+    var(--station-bg);
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.04);
+  filter: saturate(1.1) contrast(1.02);
+}
+
+.gacha-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 68% 42%, rgba(71, 214, 255, .18), transparent 28%),
+    radial-gradient(circle at 16% 52%, rgba(255, 213, 80, .14), transparent 20%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.gacha-stage::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 6;
+  border: 1px solid rgba(124, 223, 255, .28);
+  box-shadow: inset 0 0 0 2px rgba(5, 15, 30, .45);
+  pointer-events: none;
+}
+
+.gacha-topbar {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 14px;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.player-chip,
+.resource-bar,
+.gacha-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-chip,
+.resource-bar span,
+.gacha-tabs button {
+  border: 1px solid rgba(79, 222, 255, .35);
+  border-radius: 4px;
+  background: rgba(4, 12, 30, .58);
+  box-shadow: inset 0 0 12px rgba(66, 207, 255, .12);
+  backdrop-filter: blur(6px);
+}
+
+.player-chip {
+  padding: 8px 12px;
+}
+
+.player-chip span {
+  color: #ffd64a;
+  font-size: .78rem;
+}
+
+.player-chip strong {
+  color: #fff;
+}
+
+.gacha-tabs {
+  justify-content: center;
+}
+
+.gacha-tabs button,
+.quick-actions button,
+.side-menu button {
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+}
+
+.gacha-tabs button {
+  padding: 9px 14px;
+  color: #a9eaff;
+}
+
+.gacha-tabs button.is-active {
+  background: #ffe24d;
+  color: #06101d;
+  border-color: #fff58f;
+}
+
+.resource-bar span {
+  padding: 8px 10px;
+  color: #d6f6ff;
+}
+
+.gacha-viewport {
+  width: 100vw;
+  height: 100vh;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.gacha-viewport:active {
+  cursor: grabbing;
+}
+
+.gacha-rail {
+  display: flex;
+  width: 400vw;
+  height: 100%;
+  transition: transform 680ms cubic-bezier(.16, 1, .3, 1);
+  will-change: transform;
+}
+
+.gacha-screen {
+  position: relative;
+  flex: 0 0 100vw;
+  height: 100vh;
+  padding: 86px 104px 76px 72px;
+}
+
+.gacha-home {
+  display: grid;
+  grid-template-columns: minmax(280px, 460px) 1fr;
+  align-items: end;
+}
+
+.character-card,
+.comms-panel,
+.screen-title {
+  border: 1px solid rgba(79, 222, 255, .32);
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(4, 12, 30, .78), rgba(18, 9, 38, .46));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .34), inset 0 0 18px rgba(66, 207, 255, .08);
+  backdrop-filter: blur(8px);
+}
+
+.character-card {
+  padding: 24px;
+}
+
+.character-card h1 {
+  margin: 16px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: 400;
+  line-height: .92;
+  text-shadow: 0 4px 0 rgba(5, 10, 24, .34);
+}
+
+.character-card p:not(.section-label) {
+  color: #b8efff;
+  line-height: 1.65;
+}
+
+.quick-actions {
+  justify-self: end;
+  align-self: end;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.quick-actions button,
+.side-menu button {
+  min-width: 180px;
+  border: 1px solid rgba(79, 222, 255, .5);
+  border-radius: 4px;
+  background: rgba(0, 178, 255, .18);
+  color: #e9fbff;
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: .08em;
+  box-shadow: inset 0 0 20px rgba(79, 222, 255, .16);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.quick-actions button:hover,
+.side-menu button:hover,
+.side-menu button.is-active {
+  transform: translateX(-4px);
+  background: rgba(0, 178, 255, .36);
+}
+
+.screen-title {
+  width: min(460px, 42vw);
+  padding: 18px 22px;
+}
+
+.screen-title h2,
+.comms-panel h2 {
+  margin: 8px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 400;
+}
+
+.mission-dock,
+.module-carousel {
+  position: absolute;
+  left: 72px;
+  right: 104px;
+  bottom: 48px;
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 10px 4px 18px;
+  scrollbar-width: thin;
+}
+
+.route-card,
+.module-token {
+  flex: 0 0 270px;
+  min-height: 178px;
+  border: 1px solid rgba(79, 222, 255, .36);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(9, 26, 52, .76), rgba(18, 9, 38, .82));
+  color: #ecfbff;
+  padding: 18px;
+  text-decoration: none;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .28), inset 0 0 18px rgba(66, 207, 255, .1);
+  backdrop-filter: blur(8px);
+}
+
+.route-card:hover,
+.module-token:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 226, 77, .9);
+}
+
+.route-card span,
+.module-token span {
+  color: #7df0ff;
+  font-size: .75rem;
+}
+
+.route-card strong,
+.module-token strong {
+  display: block;
+  margin-top: 18px;
+  font-family: Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+}
+
+.route-card small,
+.module-token small {
+  display: block;
+  margin-top: 12px;
+  color: #acd9e6;
+}
+
+.route-card em,
+.module-token em {
+  display: inline-block;
+  margin-top: 16px;
+  border-radius: 3px;
+  background: rgba(255, 226, 77, .92);
+  color: #06101d;
+  padding: 4px 8px;
+  font-style: normal;
+  font-size: .75rem;
+}
+
+.comms-panel {
+  width: min(440px, 80vw);
+  margin-top: 18vh;
+  padding: 24px;
+}
+
+.comms-panel a {
+  display: block;
+  margin-top: 14px;
+  color: #a9eaff;
+  text-decoration: none;
+}
+
+.side-menu {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  z-index: 10;
+  display: grid;
+  gap: 12px;
+  transform: translateY(-50%);
+}
+
+.bottom-hint {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  z-index: 10;
+  color: #9edff0;
+  font-size: .75rem;
+  letter-spacing: .18em;
+}
+
+.gacha-stage[data-active-screen="1"] .gacha-bg {
+  transform: scale(1.08) translateX(-2%);
+}
+
+.gacha-stage[data-active-screen="2"] .gacha-bg {
+  transform: scale(1.1) translateX(-5%);
+}
+
+.gacha-stage[data-active-screen="3"] .gacha-bg {
+  transform: scale(1.08) translateX(2%);
+}
+
+.gacha-bg {
+  transition: transform 680ms cubic-bezier(.16, 1, .3, 1), filter 680ms ease;
+}
+
+@media (max-width: 760px) {
+  .gacha-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-bar {
+    display: none;
+  }
+
+  .gacha-tabs {
+    justify-content: start;
+    overflow-x: auto;
+  }
+
+  .gacha-screen {
+    padding: 128px 20px 96px;
+  }
+
+  .gacha-home {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions {
+    justify-self: start;
+  }
+
+  .mission-dock,
+  .module-carousel {
+    left: 20px;
+    right: 20px;
+    bottom: 84px;
+  }
+
+  .side-menu {
+    display: none;
+  }
+}
+
+.cupola-pixel {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(192, 132, 252, .12), transparent 62%),
+    rgba(13, 9, 32, .82);
+}
+
+.cupola-nebula-image {
+  position: absolute;
+  inset: 9%;
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  opacity: .82;
+  filter: saturate(1.08) contrast(1.08) brightness(.82);
+  transform: scale(1.08);
+}
+
+.cupola-pixel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 48%, rgba(6, 3, 15, .5) 72%),
+    linear-gradient(130deg, rgba(255, 255, 255, .08), transparent 24% 72%, rgba(124, 58, 237, .1));
+  pointer-events: none;
+}
+
+.cupola-window {
+  z-index: 2;
+  background: rgba(16, 8, 37, .42);
+  backdrop-filter: blur(1px);
+}
+
+.cupola-window-center {
+  background: rgba(16, 8, 37, .24);
+}
+
+.mission-button:hover {
+  transform: translateY(-2px);
+  background: #3b1684;
+}
+
+.site-footer {
+  display: grid;
+  width: min(1120px, calc(100% - 32px));
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 40px auto 0;
+  padding: 64px 0 32px;
+  border-top: 1px solid #120926;
+}
+
+.footer-note {
+  position: relative;
+  max-width: 270px;
+  border-radius: 2px;
+  background: #f5f0dc;
+  padding: 26px 22px 18px;
+  color: #412402;
+  transform: rotate(-1deg);
+}
+
+.paper-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 56px;
+  height: 16px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: rgba(245, 200, 66, .78);
+}
+
+.footer-note p {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.footer-note small {
+  display: block;
+  margin-top: 14px;
+}
+
+.footer-contact {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.footer-contact a,
+.back-link {
+  color: #a78bca;
+  text-decoration: none;
+}
+
+.footer-contact a:hover,
+.back-link:hover {
+  color: #c084fc;
+}
+
+.footer-mark {
+  grid-column: 1 / -1;
+  margin: 16px 0 0;
+  color: #3d2870;
+  font-size: .75rem;
+  letter-spacing: .18em;
+  text-align: center;
+}
+
+.project-page {
+  width: min(860px, calc(100% - 32px));
+  min-height: 100vh;
+  margin-inline: auto;
+  padding: 80px 0;
+}
+
+.project-panel {
+  margin-top: 42px;
+  border: 2px solid #2a1a4a;
+  border-radius: 6px;
+  background: rgba(14, 7, 32, .92);
+  padding: clamp(24px, 5vw, 48px);
+}
+
+.project-panel h1 {
+  margin: 18px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.project-panel p {
+  color: #a78bca;
+  line-height: 1.8;
+}
+
+.project-panel ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 28px 0;
+  list-style: none;
+}
+
+.project-panel li,
+.project-status {
+  border: 1px solid #3d2870;
+  border-radius: 4px;
+  background: #120926;
+  padding: 8px 10px;
+  color: #c084fc;
+  font-size: .78rem;
+}
+
+@media (min-width: 860px) {
+  .hero-section {
+    grid-template-columns: 1.05fr .95fr;
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+html {
+  font-family: "Courier New", monospace;
 
 }
 
@@ -18,15 +831,13 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 28% 72%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 46% 32%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 64% 78%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, 0.6) 0 1px, transparent 1.4px),
-    radial-gradient(ellipse at 50% 35%, rgba(124, 58, 237, 0.16), transparent 42%),
-    radial-gradient(ellipse at 70% 68%, rgba(155, 77, 202, 0.1), transparent 36%),
-    linear-gradient(180deg, #03010a 0%, #06030f 42%, #090417 100%);
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1px),
+    radial-gradient(circle at 28% 72%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1px),
+    radial-gradient(circle at 46% 32%, rgba(255, 255, 255, 0.72) 0 1px, transparent 1px),
+    radial-gradient(circle at 64% 78%, rgba(255, 255, 255, 0.58) 0 1px, transparent 1px),
+    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.76) 0 1px, transparent 1px),
+    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, 0.52) 0 1px, transparent 1px),
+    #06030f;
   background-attachment: fixed;
   background-size:
     360px 360px,
@@ -35,9 +846,8 @@ body {
     460px 460px,
     560px 560px,
     620px 620px,
-    100% 100%,
-    100% 100%,
     100% 100%;
+  image-rendering: pixelated;
   color: #e8d8ff;
 }
 
@@ -209,4 +1019,81 @@ body {
   .mission-button-secondary {
     background: transparent;
   }
+}
+
+/* Final portfolio polish lives after the early component draft above. */
+.module-card {
+  min-height: 236px;
+  border-color: #3d2870;
+  border-radius: 6px;
+  background: rgba(18, 9, 38, .88);
+  box-shadow: inset 0 0 0 1px rgba(192, 132, 252, .08);
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  border-color: #9b4dca;
+  animation: pixel-glow 260ms ease both;
+}
+
+.module-screen {
+  display: grid;
+  width: 72px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid #9b4dca;
+  border-radius: 4px;
+  background: #050312;
+  color: #c084fc;
+}
+
+.module-card strong {
+  margin-top: 18px;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #e8d8ff;
+}
+
+.module-card small {
+  margin-top: 8px;
+  color: #a78bca;
+}
+
+.module-card em {
+  margin-top: 14px;
+  border: 1px solid #7c55c8;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #c084fc;
+  font-size: .68rem;
+  font-style: normal;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.mission-monitor {
+  align-content: center;
+  gap: 10px;
+  padding: 18px;
+  text-align: center;
+  background:
+    repeating-linear-gradient(0deg, rgba(192, 132, 252, .05) 0 1px, transparent 1px 5px),
+    #050210;
+}
+
+.monitor-line {
+  font-size: .7rem;
+  color: #7c55c8;
+}
+
+.monitor-title {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  color: #c084fc;
 }

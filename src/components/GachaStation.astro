@@ -1,0 +1,155 @@
+---
+import stationBg from '../assets/iss022e066972_Cupola_on_ISS_extviews_-_4_pillars.jpg';
+import { modules } from '../data/modules';
+import { projects } from '../data/projects';
+---
+
+<main class="gacha-stage" style={`--station-bg: url("${stationBg.src}")`}>
+  <div class="gacha-bg" aria-hidden="true"></div>
+
+  <header class="gacha-topbar">
+    <div class="player-chip">
+      <span>LV.01</span>
+      <strong>NICHOLE</strong>
+    </div>
+
+    <nav class="gacha-tabs" aria-label="Navegacao principal">
+      <button class="is-active" type="button" data-screen="0">HOME</button>
+      <button type="button" data-screen="1">MISSOES</button>
+      <button type="button" data-screen="2">MODULOS</button>
+      <button type="button" data-screen="3">COMMS</button>
+    </nav>
+
+    <div class="resource-bar" aria-label="Status">
+      <span>204/91</span>
+      <span>98215</span>
+      <span>265</span>
+    </div>
+  </header>
+
+  <section class="gacha-viewport" data-gacha-viewport>
+    <div class="gacha-rail" data-gacha-rail>
+      <article class="gacha-screen gacha-home">
+        <div class="character-card">
+          <p class="section-label">ESTACAO BORBOLETA</p>
+          <h1>Portfolio em modo orbital.</h1>
+          <p>
+            Interface experimental para projetos, dados e sistemas visuais.
+            Arraste para o lado ou use as abas para navegar.
+          </p>
+        </div>
+
+        <div class="quick-actions">
+          <button type="button" data-screen="1">INICIAR MISSAO</button>
+          <button type="button" data-screen="2">ABRIR MODULOS</button>
+        </div>
+      </article>
+
+      <article class="gacha-screen gacha-missions">
+        <div class="screen-title">
+          <p class="section-label">MISSION SELECT</p>
+          <h2>Rotas principais</h2>
+        </div>
+
+        <div class="mission-dock">
+          {projects.map((project, index) => (
+            <a class="route-card" href={`/projects/${project.slug}/`}>
+              <span>ROUTE {String(index + 1).padStart(2, '0')}</span>
+              <strong>{project.title}</strong>
+              <small>{project.stack.join(' / ')}</small>
+              <em>{project.status}</em>
+            </a>
+          ))}
+        </div>
+      </article>
+
+      <article class="gacha-screen gacha-modules">
+        <div class="screen-title">
+          <p class="section-label">MODULE MAP</p>
+          <h2>Arraste lateral desbloqueado</h2>
+        </div>
+
+        <div class="module-carousel">
+          {modules.map((module) => (
+            <a class="module-token" href={module.href}>
+              <span>{module.codeName}</span>
+              <strong>{module.title}</strong>
+              <small>{module.subtitle}</small>
+              {module.status && <em>{module.status}</em>}
+            </a>
+          ))}
+        </div>
+      </article>
+
+      <article class="gacha-screen gacha-comms">
+        <div class="comms-panel">
+          <p class="section-label">AIRLOCK / CONTATO</p>
+          <h2>Canal aberto.</h2>
+          <a href="https://github.com/" target="_blank">github.com/seunome</a>
+          <a href="https://www.linkedin.com/" target="_blank">linkedin/seunome</a>
+          <a href="mailto:seu@email.com">seu@email.com</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <aside class="side-menu" aria-label="Atalhos">
+    <button type="button" data-screen="1">ATTACK</button>
+    <button type="button" data-screen="2">VALKYRIA</button>
+    <button type="button" data-screen="3">SUPPLY</button>
+  </aside>
+
+  <div class="bottom-hint">DRAG / SHIFT + WHEEL / ARROWS</div>
+</main>
+
+<script>
+  const stage = document.querySelector('.gacha-stage');
+  const rail = document.querySelector('[data-gacha-rail]');
+  const viewport = document.querySelector('[data-gacha-viewport]');
+  const controls = document.querySelectorAll('[data-screen]');
+  const maxScreen = 3;
+  let activeScreen = 0;
+  let startX = 0;
+  let dragging = false;
+
+  const setScreen = (screen) => {
+    activeScreen = Math.max(0, Math.min(maxScreen, screen));
+    rail?.setAttribute('style', `transform: translate3d(${-activeScreen * 100}vw, 0, 0)`);
+    stage?.setAttribute('data-active-screen', String(activeScreen));
+    controls.forEach((control) => {
+      control.classList.toggle('is-active', control.getAttribute('data-screen') === String(activeScreen));
+    });
+  };
+
+  controls.forEach((control) => {
+    control.addEventListener('click', () => {
+      setScreen(Number(control.getAttribute('data-screen') ?? 0));
+    });
+  });
+
+  viewport?.addEventListener('pointerdown', (event) => {
+    dragging = true;
+    startX = event.clientX;
+    viewport.setPointerCapture(event.pointerId);
+  });
+
+  viewport?.addEventListener('pointerup', (event) => {
+    if (!dragging) return;
+    dragging = false;
+    const diff = event.clientX - startX;
+    if (Math.abs(diff) > 64) {
+      setScreen(activeScreen + (diff < 0 ? 1 : -1));
+    }
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') setScreen(activeScreen + 1);
+    if (event.key === 'ArrowLeft') setScreen(activeScreen - 1);
+  });
+
+  window.addEventListener('wheel', (event) => {
+    if (!event.shiftKey) return;
+    event.preventDefault();
+    setScreen(activeScreen + (event.deltaY > 0 ? 1 : -1));
+  }, { passive: false });
+</script>

@@ -7,7 +7,7 @@ export type PortfolioModule = {
   subtitle: string;
   href: string;
   status?: string;
-  kind: 'about' | 'science' | 'software' | 'data' | 'writing';
+  kind: 'about' | 'science' | 'software' | 'data' | 'writing' | 'geotec';
 };
 
 export const modules: PortfolioModule[] = [
@@ -16,7 +16,7 @@ export const modules: PortfolioModule[] = [
     codeName: 'MODULO NICHOLE',
     title: 'sobre mim',
     subtitle: 'origens · missão',
-    href: '#sobre',
+    href: '/modules/sobre-mim/',
     kind: 'about',
   },
   {
@@ -24,7 +24,7 @@ export const modules: PortfolioModule[] = [
     codeName: 'MODULO COMP.',
     title: 'software',
     subtitle: 'projetos · código',
-    href: '#projetos',
+    href: '/modules/software/',
     status: 'EM ORBITA',
     kind: 'software',
   },
@@ -51,5 +51,14 @@ export const modules: PortfolioModule[] = [
     subtitle: 'pesquisa · descobertas',
     href: '#ciencia',
     kind: 'science',
+  },
+  {
+    id: 'geotec',
+    codeName: 'MODULO GEOTEC',
+    title: 'geotec',
+    subtitle: 'notebooks / geociencias',
+    href: 'https://github.com/nicholetzs/geotec/tree/main/prog-geo',
+    status: 'LAB ATIVO',
+    kind: 'geotec',
   }
 ];

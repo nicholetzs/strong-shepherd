@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import stationBg from '../../assets/iss022e066972_Cupola_on_ISS_extviews_-_4_pillars.jpg';
+---
+
+<BaseLayout title="Sobre mim | Estacao Borboleta">
+  <main class="mission-detail" style={`--station-bg: url("${stationBg.src}")`}>
+    <div class="mission-detail-bg" aria-hidden="true"></div>
+
+    <header class="mission-detail-topbar">
+      <a class="detail-back-button" href="/">BACK / HOME</a>
+
+      <div class="detail-title-chip">
+        <span>MODULO NICHOLE NICOLINI</span>
+        <strong>ONLINE</strong>
+      </div>
+
+      <div class="detail-resources">
+        <span>PROFILE</span>
+        <span>SYNC 100%</span>
+      </div>
+    </header>
+
+    <section class="mission-briefing section-reveal">
+      <article class="briefing-panel">
+        <p class="section-label">ABOUT MODULE</p>
+        <h1>Sobre mim</h1>
+
+        <p>
+          Sou cientista da computação, formada em Análise e Desenvolvimento de
+          Sistemas e em Ciência da Computação. Também sou astrônoma amadora,
+          desenvolvedora e cientista de dados.
+        </p>
+
+        <p>
+          Tenho interesse em astronomia no geral, especialmente exoplanetas. Minha
+          trilha atual cruza machine learning, Ciência de dados e astronomia, e por
+          isso venho estudando para seguir um mestrado em Astronomia.
+        </p>
+
+        <p>
+          Tambem gosto de literatura, principalmente Dostoievski.
+        </p>
+
+        <div class="briefing-actions">
+          <a class="detail-action" href="/">VOLTAR PARA HOME</a>
+          <a class="detail-action detail-action-ghost" href="mailto:seu@email.com">CONTATO</a>
+        </div>
+      </article>
+
+      <aside class="briefing-loadout">
+        <div class="loadout-card is-active">
+          <span>ROLE</span>
+          <strong>Computer Scientist</strong>
+        </div>
+
+        <div class="loadout-card">
+          <span>INTERESSES</span>
+          <ul>
+            <li>Exoplanetas</li>
+            <li>Machine Learning</li>
+            <li>Ciência de dados</li>
+            <li>Astronomia</li>
+            <li>Python</li>
+          </ul>
+        </div>
+
+        <div class="loadout-card">
+          <span>FORMAÇÃO</span>
+          <strong>ADS / Ciência da computação</strong>
+        </div>
+
+        <div class="loadout-card quote-card">
+          <span>NOTA DE BORDO</span>
+          <p>
+            "O homem é um misterio. E preciso desvendá-lo, e se passares a vida
+            inteira nisso, não digas que perdeste tempo."
+          </p>
+          <small>Dostoievski</small>
+        </div>
+
+        <div class="loadout-card">
+          <span>STATUS</span>
+          <strong>Rumo ao mestrado!</strong>
+        </div>
+      </aside>
+    </section>
+  </main>
+</BaseLayout>

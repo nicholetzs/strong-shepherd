@@ -48,12 +48,20 @@ import { projects } from '../data/projects';
       <article class="gacha-screen gacha-missions">
         <div class="screen-title">
           <p class="section-label">MISSION SELECT</p>
-          <h2>Rotas principais</h2>
+          <h1>Rotas principais</h1>
         </div>
 
         <div class="mission-dock">
           {projects.map((project, index) => (
-            <a class="route-card" href={`/projects/${project.slug}/`}>
+            <a
+              class="route-card"
+              href={project.href ?? `/projects/${project.slug}/`}
+              target={project.href ? '_blank' : undefined}
+              rel={project.href ? 'noreferrer' : undefined}
+            >
+               {project.previewImage && (
+               <img class="route-preview" src={project.previewImage} alt={`Preview do projeto ${project.title}`} />
+               )}
               <span>ROUTE {String(index + 1).padStart(2, '0')}</span>
               <strong>{project.title}</strong>
               <small>{project.stack.join(' / ')}</small>
@@ -71,7 +79,12 @@ import { projects } from '../data/projects';
 
         <div class="module-carousel">
           {modules.map((module) => (
-            <a class="module-token" href={module.href}>
+            <a
+              class="module-token"
+              href={module.href}
+              target={module.href.startsWith('http') ? '_blank' : undefined}
+              rel={module.href.startsWith('http') ? 'noreferrer' : undefined}
+            >
               <span>{module.codeName}</span>
               <strong>{module.title}</strong>
               <small>{module.subtitle}</small>

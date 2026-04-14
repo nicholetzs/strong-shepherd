@@ -272,21 +272,22 @@ a {
 body:has(.mission-detail) {
   width: 100vw;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #020008;
 }
 
 .mission-detail {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
   color: #eef8ff;
   background: #020008;
   isolation: isolate;
 }
 
 .mission-detail-bg {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: -3;
   background-image:
@@ -388,10 +389,10 @@ body:has(.mission-detail) {
   grid-template-columns: minmax(300px, 1fr) minmax(260px, 360px);
   gap: 24px;
   width: min(1180px, calc(100% - 48px));
-  min-height: 100vh;
+  min-height: calc(100vh - 152px);
   margin-inline: auto;
-  align-items: end;
-  padding: 92px 0 60px;
+  align-items: center;
+  padding: 92px 0 72px;
 }
 
 .briefing-panel,

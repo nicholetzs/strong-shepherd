@@ -141,6 +141,7 @@ import { projects } from '../data/projects';
   });
 
   viewport?.addEventListener('pointerdown', (event) => {
+    if (event.target instanceof Element && event.target.closest('a, button')) return;
     dragging = true;
     startX = event.clientX;
     viewport.setPointerCapture(event.pointerId);

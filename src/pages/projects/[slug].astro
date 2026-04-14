@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import stationBg from '../../assets/iss022e066972_Cupola_on_ISS_extviews_-_4_pillars.jpg';
 import { projects } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -14,24 +15,54 @@ const { project } = Astro.props;
 ---
 
 <BaseLayout title={`${project.title} | Estacao Borboleta`}>
-  <main class="project-page section-reveal">
-    <a class="back-link" href="/">VOLTAR PARA A ESTACAO</a>
+  <main class="mission-detail" style={`--station-bg: url("${stationBg.src}")`}>
+    <div class="mission-detail-bg" aria-hidden="true"></div>
 
-    <article class="project-panel">
-      <p class="section-label">{project.mission}</p>
-      <h1>{project.title}</h1>
-      <p>{project.description}</p>
+    <header class="mission-detail-topbar">
+      <a class="detail-back-button" href="/">BACK / HOME</a>
 
-      <ul>
-        {project.stack.map((item) => <li>{item}</li>)}
-      </ul>
-
-      <span class="project-status">STATUS: {project.status}</span>
-
-      <div class="hero-actions">
-        {project.github && <a class="mission-button" href={project.github}>GITHUB</a>}
-        {project.href && <a class="mission-button" href={project.href}>VER PROJETO</a>}
+      <div class="detail-title-chip">
+        <span>{project.mission}</span>
+        <strong>{project.status}</strong>
       </div>
-    </article>
+
+      <div class="detail-resources">
+        <span>DATA LINK</span>
+        <span>SYNC 100%</span>
+      </div>
+    </header>
+
+    <section class="mission-briefing section-reveal">
+      <article class="briefing-panel">
+        <p class="section-label">MISSION BRIEFING</p>
+        <h1>{project.title}</h1>
+        <p>{project.description}</p>
+
+        <div class="briefing-actions">
+          {project.github && <a class="detail-action" href={project.github}>GITHUB</a>}
+          {project.href && <a class="detail-action" href={project.href}>VER PROJETO</a>}
+          <a class="detail-action detail-action-ghost" href="/">VOLTAR</a>
+        </div>
+      </article>
+
+      <aside class="briefing-loadout">
+        <div class="loadout-card is-active">
+          <span>MISSION ID</span>
+          <strong>{project.mission}</strong>
+        </div>
+
+        <div class="loadout-card">
+          <span>MODULE</span>
+          <strong>{project.moduleId}</strong>
+        </div>
+
+        <div class="loadout-card">
+          <span>STACK</span>
+          <ul>
+            {project.stack.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </aside>
+    </section>
   </main>
 </BaseLayout>

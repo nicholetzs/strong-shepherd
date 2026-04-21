@@ -8,19 +8,71 @@ import { projects } from '../data/projects';
     <h2 class="section-title">Projetos em painel de bordo.</h2>
 
     <div class="mission-grid">
-      {projects.map((project) => (
-        <article class="mission-card">
-          <div class="mission-tape">{project.mission}</div>
-          <div class="mission-monitor">
-            <span class="monitor-line">STATUS: {project.status}</span>
-            <span class="monitor-title">{project.title}</span>
-          </div>
-          <h2>{project.title}</h2>
-          <p class="mission-stack">{project.stack.join(' · ')}</p>
-          <p class="mission-description">{project.description}</p>
-          <a class="mission-button" href={`/projects/${project.slug}/`}>ACESSAR MISSAO</a>
-        </article>
-      ))}
+      {projects.map((project) => {
+        const backDescription = project.backDescription ?? project.description;
+
+        return (
+          <article class="mission-card" data-flip-card>
+            <div class="mission-card-inner">
+              <div class="mission-card-face mission-card-front">
+                <div class="mission-tape">{project.mission}</div>
+                <div class="mission-monitor">
+                  <span class="monitor-line">STATUS: {project.status}</span>
+                  <span class="monitor-title">{project.title}</span>
+                </div>
+               
+                <p class="mission-stack">{project.stack.join(' · ')}</p>
+                <p class="mission-description">{project.description}</p>
+                <div class="mission-card-actions">
+                  <a class="mission-button" href={`/projects/${project.slug}/`}>ACESSAR MISSAO</a>
+                  <button class="mission-button mission-button-secondary" type="button" data-flip-toggle aria-pressed="false">
+                    VIRAR
+                  </button>
+                </div>
+              </div>
+
+              <div class="mission-card-face mission-card-back" aria-hidden="true">
+                <div class="mission-tape">VERSO</div>
+                <p class="mission-back-label">NOTAS DA MISSAO</p>
+                <h2>{project.title}</h2>
+                <p class="mission-back-description">{backDescription}</p>
+                <div class="mission-card-actions">
+                  <a class="mission-button" href={`/projects/${project.slug}/`}>ABRIR DETALHES</a>
+                  <button class="mission-button mission-button-secondary" type="button" data-flip-toggle aria-pressed="true">
+                    VOLTAR
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
+
+<script>
+  const cards = document.querySelectorAll('[data-flip-card]');
+
+  cards.forEach((card) => {
+    const toggles = card.querySelectorAll('[data-flip-toggle]');
+
+    const setFlipped = (isFlipped: boolean) => {
+      card.classList.toggle('is-flipped', isFlipped);
+      toggles.forEach((toggle) => {
+        toggle.setAttribute('aria-pressed', String(isFlipped));
+      });
+      card.querySelectorAll('.mission-card-face').forEach((face, index) => {
+        face.setAttribute('aria-hidden', index === 0 ? String(isFlipped) : String(!isFlipped));
+      });
+    };
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        setFlipped(!card.classList.contains('is-flipped'));
+      });
+    });
+
+    setFlipped(false);
+  });
+</script>

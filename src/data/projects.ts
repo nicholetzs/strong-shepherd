@@ -11,6 +11,7 @@ export type Project = {
   github?: string;
   moduleId: string;
   previewImage?: string;
+  backDescription?: string;
 };
 
 export const projects: Project[] = [
@@ -35,6 +36,7 @@ export const projects: Project[] = [
     href: 'https://xawpfum7gezaxhvqwlphtb.streamlit.app/', // Se não tem href, abre /projects/${project.slug}/
     github: 'https://github.com/nicholetzs/KDD',
     previewImage: '/projects/analise-dados-covid.png',
+    backDescription:'Esse projeto envolve a etapa de Knowledge Discovery in Databases (KDD), coleta e análise de dados da Covid-19 para tomada de decisões.  ',
   },
   {
   slug: 'geotec-notebooks',

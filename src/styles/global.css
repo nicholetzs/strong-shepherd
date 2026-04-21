@@ -244,7 +244,46 @@ a {
 }
 
 .mission-card {
+  position: relative;
+  min-height: 100%;
+  perspective: 1200px;
+  background: transparent;
+}
+
+.mission-card-inner {
+  position: relative;
+  min-height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.mission-card.is-flipped .mission-card-inner {
+  transform: rotateY(180deg);
+}
+
+.mission-card-face {
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   background: rgba(14, 7, 32, .92);
+}
+
+.mission-card-front,
+.mission-card-back {
+  position: relative;
+  border: 2px solid #2a1a4a;
+  border-radius: 6px;
+  padding: 28px 20px 24px;
+}
+
+.mission-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at top, rgba(124, 85, 200, .2), transparent 52%),
+    rgba(14, 7, 32, .95);
 }
 
 .mission-monitor {
@@ -770,7 +809,7 @@ body:has(.gacha-stage) {
   position: absolute;
   left: 72px;
   right: 104px;
-  bottom: 48px;
+  bottom: 90px;
   display: flex;
   gap: 18px;
   overflow-x: auto;
@@ -792,10 +831,130 @@ body:has(.gacha-stage) {
   backdrop-filter: blur(8px);
 }
 
+.route-card {
+  --route-card-height: 360px;
+  position: relative;
+  min-height: var(--route-card-height);
+  perspective: 1200px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  text-decoration: none;
+}
+
+.route-card-inner {
+  position: relative;
+  min-height: var(--route-card-height);
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.route-card.is-flipped .route-card-inner {
+  transform: rotateY(180deg);
+}
+
+.route-card-face {
+  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(79, 222, 255, .36);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(9, 26, 52, .76), rgba(18, 9, 38, .82));
+  color: #ecfbff;
+  padding: 18px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .28), inset 0 0 18px rgba(66, 207, 255, .1);
+  backdrop-filter: blur(8px);
+}
+
+.route-card-front {
+  justify-content: flex-start;
+}
+
+.route-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.route-card-back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at top, rgba(255, 226, 77, .16), transparent 46%),
+    linear-gradient(180deg, rgba(9, 26, 52, .8), rgba(18, 9, 38, .9));
+}
+
+.route-preview {
+  width: 100%;
+  height: 92px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.route-card-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(79, 222, 255, .26);
+  flex-wrap: nowrap;
+}
+
+.route-card-link,
+.route-card-flip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 1px solid rgba(79, 222, 255, .5);
+  border-radius: 4px;
+  background: rgba(0, 178, 255, .18);
+  padding: 10px 12px;
+  color: #e9fbff;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.route-card-link {
+  flex: 1 1 140px;
+}
+
+.route-card-flip {
+  flex: 0 0 auto;
+}
+
+.route-card-link:hover,
+.route-card-flip:hover {
+  background: rgba(0, 178, 255, .36);
+}
+
+.route-card-back-description {
+  margin-top: 8px;
+  color: #acd9e6;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.route-card-back strong {
+  margin-top: 14px;
+  font-size: 1.35rem;
+}
+
 .route-card:hover,
 .module-token:hover {
   transform: translateY(-8px);
-  border-color: rgba(255, 226, 77, .9);
 }
 
 .route-card span,
@@ -910,8 +1069,12 @@ body:has(.gacha-stage) {
   .mission-dock,
   .module-carousel {
     left: 20px;
-    right: 20px;
-    bottom: 84px;
+    right: 132px;
+    bottom: 0px;
+  }
+
+  .route-card {
+    --route-card-height: 360px;
   }
 
   .side-menu {
@@ -1282,6 +1445,28 @@ body {
     margin-top: 14px;
   }
 
+  .mission-back-label {
+    margin-top: 18px;
+    font-family: "Courier New", monospace;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    color: #7c55c8;
+  }
+
+  .mission-back-description {
+    margin-top: 14px;
+    color: #d7c4ff;
+    line-height: 1.8;
+  }
+
+  .mission-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+
   .mission-button {
     display: inline-flex;
     align-items: center;
@@ -1299,6 +1484,10 @@ body {
 
   .mission-button-secondary {
     background: transparent;
+  }
+
+  .mission-card-back .mission-button {
+    border-color: #6e3fa6;
   }
 }
 

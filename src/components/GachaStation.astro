@@ -52,22 +52,53 @@ import { projects } from '../data/projects';
         </div>
 
         <div class="mission-dock">
-          {projects.map((project, index) => (
-            <a
-              class="route-card"
-              href={project.href ?? `/projects/${project.slug}/`}
-              target={project.href ? '_blank' : undefined}
-              rel={project.href ? 'noreferrer' : undefined}
-            >
-               {project.previewImage && (
-               <img class="route-preview" src={project.previewImage} alt={`Preview do projeto ${project.title}`} />
-               )}
-              <span>ROUTE {String(index + 1).padStart(2, '0')}</span>
-              <strong>{project.title}</strong>
-              <small>{project.stack.join(' / ')}</small>
-              <em>{project.status}</em>
-            </a>
-          ))}
+          {projects.map((project, index) => {
+            const projectUrl = project.href ?? `/projects/${project.slug}/`;
+            const backDescription = project.backDescription ?? project.description;
+
+            return (
+              <article class="route-card" data-flip-card>
+                <div class="route-card-inner">
+                  <div class="route-card-face route-card-front">
+                    <div class="route-card-body">
+                      <span>ROUTE {String(index + 1).padStart(2, '0')}</span>
+                      <!--{project.previewImage && (
+                        <img class="route-preview" src={project.previewImage} alt={`Preview do projeto ${project.title}`} />
+                      )} -->
+                      <strong>{project.title}</strong>
+                      <small>{project.stack.join(' / ')}</small>
+                      <em>{project.status}</em>
+                    </div>
+
+                    <div class="route-card-actions">
+                      <a class="route-card-link" href={projectUrl} target={project.href ? '_blank' : undefined} rel={project.href ? 'noreferrer' : undefined}>
+                        ABRIR PROJETO
+                      </a>
+                      <button class="route-card-flip" type="button" data-flip-toggle aria-pressed="false">
+                        VIRAR
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="route-card-face route-card-back" aria-hidden="true">
+                    <div class="route-card-body">
+                      <span>BACK LOG</span>
+                      <p class="route-card-back-description">{backDescription}</p>
+                    </div>
+
+                    <div class="route-card-actions">
+                      <a class="route-card-link" href={projectUrl} target={project.href ? '_blank' : undefined} rel={project.href ? 'noreferrer' : undefined}>
+                        ABRIR PROJETO
+                      </a>
+                      <button class="route-card-flip" type="button" data-flip-toggle aria-pressed="true">
+                        VOLTAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </article>
 
@@ -98,9 +129,9 @@ import { projects } from '../data/projects';
         <div class="comms-panel">
           <p class="section-label">AIRLOCK / CONTATO</p>
           <h2>Canal aberto.</h2>
-          <a href="https://github.com/" target="_blank">github.com/seunome</a>
-          <a href="https://www.linkedin.com/" target="_blank">linkedin/seunome</a>
-          <a href="mailto:seu@email.com">seu@email.com</a>
+          <a href="https://github.com/nicholetzs" target="_blank">github.com/nicholetzs</a>
+          <a href="https://www.linkedin.com/in/nicholetzs" target="_blank">linkedin/nicholetzs</a>
+          <a href="mailto:seu@email.com">nchnicolini@gmail.com</a>
         </div>
       </article>
     </div>
@@ -118,14 +149,18 @@ import { projects } from '../data/projects';
 <script>
   const stage = document.querySelector('.gacha-stage');
   const rail = document.querySelector('[data-gacha-rail]');
-  const viewport = document.querySelector('[data-gacha-viewport]');
+  const viewport = document.querySelector<HTMLElement>('[data-gacha-viewport]');
   const controls = document.querySelectorAll('[data-screen]');
   const maxScreen = 3;
   let activeScreen = 0;
   let startX = 0;
   let dragging = false;
 
-  const setScreen = (screen) => {
+  if (!viewport) {
+    throw new Error('Gacha viewport not found');
+  }
+
+  const setScreen = (screen: number) => {
     activeScreen = Math.max(0, Math.min(maxScreen, screen));
     rail?.setAttribute('style', `transform: translate3d(${-activeScreen * 100}vw, 0, 0)`);
     stage?.setAttribute('data-active-screen', String(activeScreen));
@@ -140,14 +175,36 @@ import { projects } from '../data/projects';
     });
   });
 
-  viewport?.addEventListener('pointerdown', (event) => {
+  document.querySelectorAll('[data-flip-card]').forEach((card) => {
+    const toggles = card.querySelectorAll('[data-flip-toggle]');
+
+    const setFlipped = (isFlipped: boolean) => {
+      card.classList.toggle('is-flipped', isFlipped);
+      toggles.forEach((toggle) => {
+        toggle.setAttribute('aria-pressed', String(isFlipped));
+      });
+      card.querySelectorAll('.route-card-face').forEach((face, index) => {
+        face.setAttribute('aria-hidden', index === 0 ? String(isFlipped) : String(!isFlipped));
+      });
+    };
+
+    toggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        setFlipped(!card.classList.contains('is-flipped'));
+      });
+    });
+
+    setFlipped(false);
+  });
+
+  viewport.addEventListener('pointerdown', (event) => {
     if (event.target instanceof Element && event.target.closest('a, button')) return;
     dragging = true;
     startX = event.clientX;
     viewport.setPointerCapture(event.pointerId);
   });
 
-  viewport?.addEventListener('pointerup', (event) => {
+  viewport.addEventListener('pointerup', (event) => {
     if (!dragging) return;
     dragging = false;
     const diff = event.clientX - startX;
@@ -156,12 +213,12 @@ import { projects } from '../data/projects';
     }
   });
 
-  window.addEventListener('keydown', (event) => {
+  window.addEventListener('keydown', (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') setScreen(activeScreen + 1);
     if (event.key === 'ArrowLeft') setScreen(activeScreen - 1);
   });
 
-  window.addEventListener('wheel', (event) => {
+  window.addEventListener('wheel', (event: WheelEvent) => {
     if (!event.shiftKey) return;
     event.preventDefault();
     setScreen(activeScreen + (event.deltaY > 0 ? 1 : -1));
